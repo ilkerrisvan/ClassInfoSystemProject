@@ -1,0 +1,118 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  
+  
+
+    <style>
+      body {
+        background-image: url('https://www.mef.edu.tr/images/logo_tr_color.png');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+     background-size: cover;
+
+  text-align: center;
+}
+
+
+
+
+
+.card {
+  
+  border-radius: 2px;
+  display: inline-block;
+  height: 150px;
+  margin: 1rem;
+  position: relative;
+  width: 200px;
+}
+
+
+    </style>
+
+<style>
+  .bar {
+  background: blue;
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin: 1em;
+}
+</style>
+  <style>
+
+   
+#bg img {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto; 
+  min-width: 50%;
+  min-height: 50%;
+}
+    
+    </style>
+<head>
+     <link rel="stylesheet" href="main.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes</title>
+</head>
+
+<body style="background-color: rgba(50, 115, 220, 0.3)">
+    
+
+    {% for i in class %}
+
+
+
+<div class="card" style="float: left; margin: 1rem; background-color: #86f0f0;">
+  
+    <div class="container">
+    <div class="card-body" style="display: table-cell">
+      <h3 class="card-title">Class No: {{i.classroom_name}}</h3>
+      <a href="{% url 'classroom:about' i.classroom_name %}" class="btn btn-dark">Login</a></p>
+    </div>
+    </div>
+  
+  
+</div>
+
+
+
+
+    
+    {% endfor %}
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

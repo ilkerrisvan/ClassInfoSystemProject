@@ -1,0 +1,647 @@
+{% load static %}
+{% load bootstrap4 %}
+
+
+<!doctype html>
+<html lang="en">
+
+<script>
+  var words = document.getElementsByClassName('word');
+var wordArray = [];
+var currentWord = 0;
+
+words[currentWord].style.opacity = 1;
+for (var i = 0; i < words.length; i++) {
+  splitLetters(words[i]);
+}
+
+function changeWord() {
+  var cw = wordArray[currentWord];
+  var nw = currentWord == words.length-1 ? wordArray[0] : wordArray[currentWord+1];
+  for (var i = 0; i < cw.length; i++) {
+    animateLetterOut(cw, i);
+  }
+  
+  for (var i = 0; i < nw.length; i++) {
+    nw[i].className = 'letter behind';
+    nw[0].parentElement.style.opacity = 1;
+    animateLetterIn(nw, i);
+  }
+  
+  currentWord = (currentWord == wordArray.length-1) ? 0 : currentWord+1;
+}
+
+function animateLetterOut(cw, i) {
+  setTimeout(function() {
+		cw[i].className = 'letter out';
+  }, i*80);
+}
+
+function animateLetterIn(nw, i) {
+  setTimeout(function() {
+		nw[i].className = 'letter in';
+  }, 340+(i*80));
+}
+
+function splitLetters(word) {
+  var content = word.innerHTML;
+  word.innerHTML = '';
+  var letters = [];
+  for (var i = 0; i < content.length; i++) {
+    var letter = document.createElement('span');
+    letter.className = 'letter';
+    letter.innerHTML = content.charAt(i);
+    word.appendChild(letter);
+    letters.push(letter);
+  }
+  
+  wordArray.push(letters);
+}
+
+changeWord();
+setInterval(changeWord, 4000);
+
+
+</script>
+ 
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:600);
+
+
+    @import url('https://fonts.googleapis.com/css?family=Roboto:700');
+
+
+    svg {
+    font-family: 'Russo One', sans-serif;
+    position: absolute; 
+   
+    margin-bottom: 150px;
+    width: 100%; height: 20%;
+}
+svg text {
+    text-transform: uppercase;
+    animation: stroke 5s infinite alternate;
+    stroke-width: 2;
+    stroke: #000000;
+    font-size: 100px;
+}
+@keyframes stroke {
+    0%   {
+        fill: rgba(0,0,0,0); stroke: rgba(0,0,0,1);
+        stroke-dashoffset: 25%; stroke-dasharray: 0 50%; stroke-width: 2;
+    }
+    70%  {fill: rgba(0,0,0,0); stroke: rgba(0,0,0,1); }
+    80%  {fill: rgba(0,0,0,0); stroke: rgba(0,0,0,1); stroke-width: 3; }
+    100% {
+        fill: rgba(0,0,0,1); stroke: rgba(0,0,0,0); 
+        stroke-dashoffset: -25%; stroke-dasharray: 50% 0; stroke-width: 0;
+    }
+}
+
+#container {
+  color:#999;
+  text-transform: uppercase;
+  font-size:36px;
+  font-weight:bold;
+  padding-top:200px;  
+  position:fixed;
+  width:100%;
+  bottom:45%;
+  display:block;
+}
+
+
+@keyframes show {
+  0% {margin-top:-270px;}
+  5% {margin-top:-180px;}
+  33% {margin-top:-180px;}
+  38% {margin-top:-90px;}
+  66% {margin-top:-90px;}
+  71% {margin-top:0px;}
+  99.99% {margin-top:0px;}
+  100% {margin-top:-270px;}
+}
+
+
+body{
+	margin: 0;
+	padding: 0;
+	background-color: #0e6cc4;
+	overflow-x:hidden;
+	overflow-y:hidden;
+  
+}
+
+/*waves****************************/
+
+
+.box {
+	position: fixed;
+	top: 40;
+	transform: rotate(40deg);
+	left: 0;
+}
+
+.wave {
+	position: fixed;
+	top: 0;
+	left: 0;
+  opacity: .4;
+  position: absolute;
+  top: 3%;
+  left: 10%;
+  background: #0af;
+  width: 1500px;
+  height: 1300px;
+  margin-left: -150px;
+  margin-top: -250px;
+  transform-origin: 50% 48%;
+  border-radius: 43%;
+  animation: drift 7000ms infinite linear;
+}
+
+.wave.-three {
+  animation: drift 7500ms infinite linear;
+	position: fixed;
+	background-color: #77daff;
+}
+
+.wave.-two {
+  animation: drift 3000ms infinite linear;
+  opacity: .1;
+  background: black;
+	position: fixed;
+}
+
+.box:after {
+  content: '';
+  display: block;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes drift {
+  from { transform: rotate(0deg); }
+  from { transform: rotate(360deg); }
+}
+
+/*LOADING SPACE*/
+
+.contain {
+	animation-delay: 4s;
+	z-index: 1000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+
+  background: #25a7d7;
+  background: -webkit-linear-gradient(#25a7d7, #2962FF);
+  background: linear-gradient(#25a7d7, #25a7d7);
+}
+
+.icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 5px;
+}
+
+/*Animation*/
+.icon:nth-child(2) img {-webkit-animation-delay: 0.2s;animation-delay: 0.2s}
+.icon:nth-child(3) img {-webkit-animation-delay: 0.3s;animation-delay: 0.3s}
+.icon:nth-child(4) img {-webkit-animation-delay: 0.4s;animation-delay: 0.4s}
+
+.icon img {
+  -webkit-animation: anim 2s ease infinite;
+  animation: anim 2s ease infinite;
+  -webkit-transform: scale(0,0) rotateZ(180deg);
+  transform: scale(0,0) rotateZ(180deg);
+}
+
+@-webkit-keyframes anim{
+  0% {
+    -webkit-transform: scale(0,0) rotateZ(-90deg);
+    transform: scale(0,0) rotateZ(-90deg);opacity:0
+  }
+  30% {
+    -webkit-transform: scale(1,1) rotateZ(0deg);
+    transform: scale(1,1) rotateZ(0deg);opacity:1
+  }
+  50% {
+    -webkit-transform: scale(1,1) rotateZ(0deg);
+    transform: scale(1,1) rotateZ(0deg);opacity:1
+  }
+  80% {
+    -webkit-transform: scale(0,0) rotateZ(90deg);
+    transform: scale(0,0) rotateZ(90deg);opacity:0
+  }
+}
+
+@keyframes anim{
+  0% {
+    -webkit-transform: scale(0,0) rotateZ(-90deg);
+    transform: scale(0,0) rotateZ(-90deg);opacity:0
+  }
+  30% {
+    -webkit-transform: scale(1,1) rotateZ(0deg);transform: scale(1,1) rotateZ(0deg);opacity:1
+  }
+  50% {
+    -webkit-transform: scale(1,1) rotateZ(0deg);
+    transform: scale(1,1) rotateZ(0deg);opacity:1
+  }
+  80% {
+    -webkit-transform: scale(0,0) rotateZ(90deg);
+    transform: scale(0,0) rotateZ(90deg);opacity:0
+  }
+}
+
+
+   
+    body {
+      background: linear-gradient(-45deg, #4589cc, #0eb6cc, #23a6d5, #0a8de4);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      margin:0px;
+  font-family:'Roboto';
+  text-align:center;
+    }
+    
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+        
+                
+                </style>
+  <head>
+    <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<script type="text/javascript" 
+            src="//code.jquery.com/jquery-1.9.1.js"> 
+  </script> 
+    <link rel="stylesheet" 
+          type="text/css" 
+          href="/css/result-light.css"> 
+    <script type="text/javascript" 
+            src= 
+"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"> 
+  </script> 
+    <link rel="stylesheet" 
+          type="text/css" 
+          href= 
+"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> 
+    <link rel="stylesheet" 
+          type="text/css" 
+          href= 
+"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
+  
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="app.css ">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
+    <link href='custom.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+    <title>Class Info</title>
+
+    
+  </head>
+  <body>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class='box'>
+      <div class='wave -one'></div>
+      <div class='wave -two'></div>
+      <div class='wave -three'></div>
+    </div>
+    
+   
+    <div class="container-fluid">
+      <div class="row">
+        <a href="{% url 'classroom:schedule' classes   %}" class="btn btn-warning" style="margin-left: 50px; background-color:gold;">Show Class Schedule</a> <!-- alınan keye göre  url-->
+        <a href="{% url 'classroom:information' classes   %}" class="btn btn-warning" style=" margin-left: 800px; background-color:gold;">Show Class Information</a>
+    
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    {% for j in student %}
+    <!--- <h1>Lecture name: {{i}}</h1>
+     <h1>lecture start time:  {{i.l_date|time:"H"}} </h1>
+     <h1>lecture end time:  {{i.l_date_end|time:"H"}} </h1>
+     <h3> current time:  {{mydate|time:"H"}} </h3>
+  -->
+
+   {% for z in j.lecture_name.all %}
+   {% for i in classes.lecture_name.all %}
+   {%if mydate|time:"H" >= i.l_date|time:"H" and mydate|time:"H" <= i.l_date_end|time:"H" %}
+   {%if i.l_date|date:"l" == mydate|date:"l" %}
+   {%if i == z %}
+   {%if j.studentbdate|date:"n,j" == mydate|date:"n,j" %}
+   <script>
+
+if (p_name == 1 || p_name === "" || p_name === " " || p_name === undefined) {
+     p_name = "Name";
+}
+if (p_age == "" || p_age === undefined) {
+     p_age = "21";
+}
+document.body.onload = set();
+
+function center(elm) {
+     marginL = (window.innerWidth - elm.clientWidth) / 2 + "px";
+     return marginL
+}
+
+function set() {
+     var id_cake = document.getElementById("cake");
+     id_cake.style.marginLeft = center(id_cake);
+     var id_hp_b = document.getElementById("hp_b");
+     id_hp_b.style.marginLeft = center(id_hp_b);
+     var id_cake_s = document.getElementById("cake_s");
+     var id_cake_p = document.getElementById("cake_p");
+     id_cake_s.innerHTML = window.p_name;
+     id_cake_p.innerHTML = window.p_age;
+}
+setInterval(function() {
+     if (window.windowH === window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight) {
+           set();
+           window.windowH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+     }
+     if (window.windowW === window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) {
+           set();
+           window.windowW = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+     }
+}, 1);
+
+   </script>
+ <style>
+@import url(https://fonts.googleapis.com/css?family=Sigmar+One);
+@import url(https://fonts.googleapis.com/css?family=Bree+Serif);
+@import url(https://fonts.googleapis.com/css?family=Comfortaa);
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+body {
+     margin: auto;
+}
+
+*:hover {
+     cursor: default;
+}
+
+*:focus {
+     cursor: default;
+}
+
+div {
+     position: absolute;
+}
+
+
+div p {
+     margin-top: -10vh;
+     font-size: 7vh;
+     color: white;
+     font-family: "Comfortaa";
+     text-shadow: .3vh .3vh #fc0, .3vh 0vh #fc0, 0vh .3vh #fc0, .3vh 0vh #fc0, -.3vh -.3vh #fc0, -.5vh .3vh #fc0, .3vh -.3vh #fc0, -.5vh 0vh #fc0, 0vh -.3vh #fc0, -.3vh 0vh #fc0, -.3vh .3vh #fc0, 0vh .5vh #fc0, -.3vh .5vh #fc0, -.5vh .5vh #fc0;
+}
+
+#hp_b {
+     height: 2vh;
+     width: 60vh;
+     border-bottom-right-radius: 20vh;
+     border-bottom-left-radius: 20vh;
+     border-bottom: 10vh solid yellow;
+     border-right: 2vh solid yellow;
+     border-left: 2vh solid yellow;
+     color: white;
+     text-shadow: .5vh .5vh black, .5vh 0vh black, 0vh .5vh black, .5vh 0vh black, -.5vh -.5vh black, -.5vh .5vh black, .5vh -.5vh black, -.5vh 0vh black, 0vh -.5vh black;
+     font-family: "Sigmar One";
+     text-align: center;
+     line-height: 13vh;
+     font-size: 4.5vh;
+}
+   </style>
+
+<div id="cake"><span id="cake_s"></span>
+ <p id="cake_p"></p>
+</div>
+<div id="hp_b"><h1>Happy Birthday! {{j.studentfullname}}</h1></div>
+ 
+  {%endif%}
+  {%endif%}
+   {%endif%}
+   {%endif%}
+   {% endfor %}
+   {% endfor %}
+   {% endfor %}
+
+
+     
+    <h2 style="text-align: center;">Time: {{mydate|date}} {{mydate|time:"h:i A"}}</h2>
+    <br>
+    {% for i in classes.lecture_name.all %}
+    {%if mydate|time:"H" >= i.l_date|time:"H" and mydate|time:"H" <= i.l_date_end|time:"H" %}
+    {%if i.l_date|date:"l" == mydate|date:"l" %}
+    
+    <svg viewBox="0 0 1320 300">
+      <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+        Current Lecture: {{i}}
+      </text>
+    </svg>	
+    
+    <!---
+    <h1 style="padding-bottom: 10px;
+    padding-top: 1%;
+    text-align: center;
+    -->
+   
+    
+ 
+
+{% endif %}
+{% endif %}
+{% endfor %}
+
+    
+  
+  
+    
+    
+    <!--
+    {% for i in classes.department_name.all %}
+     <h1>Ders: {{i}}</h1>
+    <h1>ads Name :  {{ads}}</h1>
+    {% for j in ads %}
+    {% for k in j.dep_name.all %}
+    <h3>----------------------------------</h3>
+    <h3>ads :{{j.dep_name.all}},{{j.ads_name}}</h3>
+
+    <h3>ads1 :{{k}} </h3>
+
+    {%endfor%} 
+    {%endfor%} 
+
+    {%endfor%}
+    --> 
+    <!-- in a container -->
+    <div class="container" style="width: 100; margin-left: auto;
+    margin-right: auto; width: auto; background-size: cover !important;
+	background-position: center center !important;"> 
+      <!--Bootstrap card with slider class-->
+     
+      <div id="carousel-demo" 
+           class="carousel slide" 
+           data-ride="carousel"> 
+           
+          <div class="carousel-inner"> 
+            
+            {% for i in classes.department_name.all %}
+        
+            {% for j in ads %}
+            {% for l in events %}
+          
+            
+            {% for k in j.dep_name.all %}
+            {% for p in l.dept_name.all %}
+           
+            
+           {%if  i == k and i == p %}
+              <div class="item"> 
+                  <img style="width: 100%; height: auto; " src= 
+"/image/{{j.image_ads}}"> 
+              </div> 
+
+              <div class="item active"> 
+                <img style="width: 100%; height: auto;" src= 
+                "/image/{{l.image_events}}"> 
+              </div> 
+              {% endif %}
+              {% endfor %}
+              {% endfor %}
+              {% endfor %}
+              {% endfor %}
+              {% endfor %}
+          </div> 
+          <!--slider control for card-->
+          <a class="left carousel-control"
+             href="#carousel-demo"
+             data-slide="prev"> 
+              <span class="glyphicon glyphicon-chevron-left"> 
+            </span> 
+          </a> 
+          <a class="right carousel-control" 
+             href="#carousel-demo" 
+             data-slide="next"> 
+              <span class="glyphicon glyphicon-chevron-right"> 
+            </span> 
+          </a> 
+         
+      </div> 
+      
+  </div> 
+    
+    <!-- {% for i in classes.lecture_name.all %}
+      
+      <h3>----------------------------------</h3>
+      <h3>Ders :{{i}} </h3> 
+      {%if lecture.l_name == i.lecture_name %}
+      <h3>{{i.l_date}}</h3>
+      {%else%}
+      <h3>Else statementtttt</h3>
+      {% endif %}
+
+      {% endfor %}
+    -->
+
+
+   
+ 
+
+  
+
+
+
+      
+
+    <script>
+     var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("slider");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+      </script>
+         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <script>
+      var touchSensitivity = 5;
+      $(".carousel").on("touchstart", function (event) {
+          var xClick = event.originalEvent.touches[0].pageX;
+          $(this).one("touchmove", function (event) {
+              var xMove = event.originalEvent.touches[0].pageX;
+              if (Math.floor(xClick - xMove) > touchSensitivity) {
+                  $(this).carousel('next');
+              } else if (Math.floor(xClick - xMove) < -(touchSensitivity)) {
+                  $(this).carousel('prev');
+              }
+          });
+          $(".carousel").on("touchend", function () {
+              $(this).off("touchmove");
+          });
+      });
+  </script>
+  
+</html>
+ 

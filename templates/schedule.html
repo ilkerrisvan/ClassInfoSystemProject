@@ -1,0 +1,394 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+
+
+        #bg img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          margin: auto;
+          min-width: 50%;
+          min-height: 50%;
+        }
+
+            </style>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat"
+rel="stylesheet">
+    <title>Class Schedule</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            background-color: #5792F2;
+            margin: 0;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        div {
+            display: flex;
+        }
+
+        .heading {
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            font-size: 14px;
+            padding: 4px;
+            padding-bottom: 8px;
+        }
+
+        .bottom pre {
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            font-size: 14px;
+            padding: 4px;
+        }
+
+        #chrome {
+            width: 940px;
+            height: 780px;
+            background-color: #FCFBF0;
+            border-radius: 6px;
+            box-shadow: 4px 4px 10px #285599;
+            overflow: hidden;
+        }
+
+        .col-7 {
+            flex-flow: column;
+            width: 18%;
+            height: 100%;
+        }
+
+        .col-7 + .col-7 {
+            border-left: 1px;
+            border-left-color: rgba(150, 150, 150, 0.9);
+            border-left-style: solid;
+        }
+
+        .row-8:nth-child(even) {
+            background-color: #F0F5F3;
+        }
+
+        .row-8 {
+            font-family: 'Montserrat', sans-serif;
+            width: 100%;
+            height: 20.5%;
+            flex-flow: row;
+            justify-content: center;
+            align-items: center;
+            color: #314A4F;
+           
+        }
+
+        .double-row {
+            height: 25%;
+            background-color: #52C5DA !important;
+        }
+
+        .font-color-white {
+            color: #111;
+        }
+
+        .break {
+            background-color: #E7DCBC !important;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <h1>{{classes.classroom_name}} 's Schedule</h1>
+
+    {% for i in classes.lecture_name.all %}
+   
+   <!--
+    <h1> Lecture Name and Hour: {{i.l_name}} {{i.l_date|date:"H"}}</h1>
+    <h1>Lecture Day: {{i.l_date|date:"l"}}</h1>
+{% endfor %}
+--> 
+    
+    <span class="heading">
+       Mef University - 2020
+   </span>
+    <div id="chrome">
+        <div class="col-7">
+            <div class="row-8 accent-1 font-color-white"></div>
+            <div class="row-8">9 - 11</div>
+            <br>
+            <div class="row-8">11 - 13</div>
+            <br>
+            <div class="row-8">13 - 15</div>
+            <br>
+            <div class="row-8">15 -17</div>
+            <br>
+            <div class="row-8">17 - 19</div>
+            <br>
+            <div class="row-8"></div>
+            <div class="row-8"></div>
+        </div>
+        <div class="col-7">
+            <div class="row-8 accent-1 font-color-white">MON</div>
+            {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Monday" %}
+            {%if  i.l_date|time:"H" == "09" or i.l_date|time:"H" == "10" or i.l_date|time:"H" == "11" %}
+            <div class="row-8"> offf {{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Monday" %}
+            {%if  i.l_date|time:"H" == "11" or i.l_date|time:"H" == "12" or i.l_date|time:"H" == "13" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Monday" %}
+            {%if  i.l_date|time:"H" == "13" or i.l_date|time:"H" == "14" or i.l_date|time:"H" == "15" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Monday" %}
+            {%if  i.l_date|time:"H" == "15" or i.l_date|time:"H" == "16" or i.l_date|time:"H" == "17" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Monday" %}
+            {%if  i.l_date|time:"H" == "17" or i.l_date|time:"H" == "18" or i.l_date|time:"H" == "19" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+            
+            <div class="row-8" style="display:none"></div>
+            <div class="row-8">
+
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="row-8 accent-1 font-color-white">TUE</div>
+            {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Tuesday" %}
+            {%if  i.l_date|time:"H" == "9" or i.l_date|time:"H" == "10" or i.l_date|time:"H" == "11" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+        <br>
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Tuesday" %}
+            {%if  i.l_date|time:"H" == "11" or i.l_date|time:"H" == "12" or i.l_date|time:"H" == "13" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Tuesday" %}
+            {%if  i.l_date|time:"H" == "13" or i.l_date|time:"H" == "14" or i.l_date|time:"H" == "15" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Tuesday" %}
+            {%if  i.l_date|time:"H" == "15" or i.l_date|time:"H" == "16" or i.l_date|time:"H" == "17" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Tuesday" %}
+            {%if  i.l_date|time:"H" == "17" or i.l_date|time:"H" == "18" or i.l_date|time:"H" == "19" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+            
+            <div class="row-8" style="display:none"></div>
+            <div class="row-8">
+
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="row-8 accent-1 font-color-white">WED</div>
+            {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Wednesday" %}
+            {%if  i.l_date|time:"H" == "09" or i.l_date|time:"H" == "10" or i.l_date|time:"H" == "11" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Wednesday" %}
+            {%if  i.l_date|time:"H" == "11" or i.l_date|time:"H" == "12" or i.l_date|time:"H" == "13" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Wednesday" %}
+            {%if  i.l_date|time:"H" == "13" or i.l_date|time:"H" == "14" or i.l_date|time:"H" == "15" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Wednesday" %}
+            {%if  i.l_date|time:"H" == "15" or i.l_date|time:"H" == "16" or i.l_date|time:"H" == "17" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Wednesday" %}
+            {%if  i.l_date|time:"H" == "17" or i.l_date|time:"H" == "18" or i.l_date|time:"H" == "19" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+            <div class="row-8 break"></div>
+            <div class="row-8" style="display:none"></div>
+            <div class="row-8 double-row">
+
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="row-8 accent-1 font-color-white">THU</div>
+            {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Thursday" %}
+            {%if  i.l_date|time:"H" == "09" or i.l_date|time:"H" == "10" or i.l_date|time:"H" == "11" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Thursday" %}
+            {%if  i.l_date|time:"H" == "12" or i.l_date|time:"H" == "13" or i.l_date|time:"H" == "14" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Thursday" %}
+            {%if  i.l_date|time:"H" == "15" or i.l_date|time:"H" == "16" or i.l_date|time:"H" == "17" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Thursday" %}
+            {%if  i.l_date|time:"H" == "18" or i.l_date|time:"H" == "19" or i.l_date|time:"H" == "20" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Thursday" %}
+            {%if  i.l_date|time:"H" == "21" or i.l_date|time:"H" == "22" or i.l_date|time:"H" == "23" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+            <div class="row-8 break"></div>
+            <div class="row-8" style="display:none"></div>
+            <div class="row-8 double-row">
+
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="row-8 accent-1 font-color-white">FRI</div>
+            {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Friday" %}
+            {%if  i.l_date|time:"H" == "9" or i.l_date|time:"H" == "10" or i.l_date|time:"H" == "11" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Friday" %}
+            {%if  i.l_date|time:"H" == "11" or i.l_date|time:"H" == "12" or i.l_date|time:"H" == "13" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Friday" %}
+            {%if  i.l_date|time:"H" == "13" or i.l_date|time:"H" == "14" or i.l_date|time:"H" == "15" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Friday" %}
+            {%if  i.l_date|time:"H" == "15" or i.l_date|time:"H" == "16" or i.l_date|time:"H" == "17" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% for i in classes.lecture_name.all %}
+            {%if  i.l_date|date:"l" == "Friday" %}
+            {%if  i.l_date|time:"H" == "17" or i.l_date|time:"H" == "18" or i.l_date|time:"H" == "19" %}
+            <div class="row-8">{{i}}</div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+            <div class="row-8 break"></div>
+            <div class="row-8" style="display:none"></div>
+            <div class="row-8 double-row">
+
+            </div>
+        </div>
+
+    </div>
+    <div class="bottom">
+        <pre>
+
+        </pre>
+    </div>
+</body>
+
+</html>

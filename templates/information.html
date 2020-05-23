@@ -1,0 +1,227 @@
+{%load static%}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    
+    <style>
+
+   
+body {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+    
+            
+            </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="animista.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Cinzel&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+
+ <h2 style="text-align: center;" class="tracking-in-expand">Time: {{mydate|date}} {{mydate|time:"h:i A"}}</h2>
+ <br>
+
+
+ {% for i in classes.lecture_name.all %}
+ {% for p in i.ta_name.all %}
+ {% for k in classes.lecture_name.all %}
+ {%if mydate|time:"H" >= k.l_date|time:"H" and mydate|time:"H" <= k.l_date_end|time:"H" %}
+ {%if k.l_date|date:"l" == mydate|date:"l" %}
+ <!--
+ <h1>Şuan ki ders: {{i}}</h1>
+ <h1> Şuan ki dersin hocası: {{p}} </h1>
+ <h1>  Şuan ki dersin hocasının doğum günü: {{p.ta_bdate}} </h1> -->
+ 
+ <div class="card" style="width:400px; margin: 0 auto; float: none; margin-bottom: 10px;">
+  <img class="card-img-top" src="/image/{{p.image_events}}" alt="Card image" style="width:100%">
+  <div class="card-body" style="font-family: 'Cinzel', serif;">
+     {%if mydate|date ==  p.ta_bdate|date %}
+     <h2 class="card-title" style="font-family: 'Chelsea Market', cursive; padding-bottom: 10px;
+     text-align: center"> Happy Birthday {{p}} !</h2>
+     {%endif%}
+    <h4 class="card-title" style="padding-bottom: 10px;
+            text-align: center;
+    
+    bottom: 0px"> {{p}}</h4>
+    <h6 class="card-title" style="padding-bottom: 10px;
+  
+    text-align: center;
+    
+    bottom: 0px">Lecture Name: {{i}}</h6>
+    <h6 style="padding-bottom: 10px;
+  
+    text-align: center;
+    
+    bottom: 0px">Lecture Starts at: {{i.l_date|time:"G:i"}}</h6 >
+
+     <h6 style="padding-bottom: 10px;
+     padding-top: 1%;
+     text-align: center;
+     
+     bottom: 0px">Lecture Finishes at: {{i.l_date_end|time:"G:i"}}</h6 >
+    
+  
+    
+  </div>
+</div>
+{%endif%}
+{%endif%}
+{% endfor %}
+ {% endfor %}
+ {% endfor %}
+ 
+     <!-- Hocanın Sınıfını Getirir
+    {% for k in classes.lecture_name.all %}
+  
+    {%if mydate|time:"H" >= k.l_date|time:"H" and mydate|time:"H" <= k.l_date_end|time:"H" %}
+  
+    
+    {%if k.l_date|date:"l" == mydate|date:"l" %}
+    {% for i in classes.lecture.name.all %}
+    
+    {% for j in  i.classroom_name.all %}
+ -->
+
+     <!--<h1>Hocanın Sınıfı: {{j}}</h1>-->
+     
+   
+   
+
+    <!--İçerisinde Bulunduğumuz Sınıf-->
+    
+    <!-- <h1>Şuan ki sınıf : {{classes}}</h1> -->
+    <!--
+     
+    {%if j == classes %}
+    <div class="card" style="width:400px; margin: 0 auto; float: none; margin-bottom: 10px;">
+      <img class="card-img-top" src="/image/{{i.image_events}}" alt="Card image" style="width:100%">
+      <div class="card-body" style="font-family: 'Cinzel', serif;">
+         {%if mydate|date ==  i.ta_bdate|date %}
+         <h2 class="card-title" style="font-family: 'Chelsea Market', cursive; padding-bottom: 10px;
+         text-align: center"> Happy Birthday {{i}} !</h2>
+         {%endif%}
+        <h4 class="card-title" style="padding-bottom: 10px;
+                text-align: center;
+        
+        bottom: 0px"> {{i}}</h4>
+        <h6 class="card-title" style="padding-bottom: 10px;
+      
+        text-align: center;
+        
+        bottom: 0px">Lecture Name: {{k}}</h6>
+        <h6 style="padding-bottom: 10px;
+      
+        text-align: center;
+        
+        bottom: 0px">Lecture Starts at: {{k.l_date|time:"G:i"}}</h6 >
+ 
+         <h6 style="padding-bottom: 10px;
+         padding-top: 1%;
+         text-align: center;
+         
+         bottom: 0px">Lecture Finishes at: {{k.l_date_end|time:"G:i"}}</h6 >
+        
+      
+        
+      </div>
+    </div>
+    -->
+    <!--
+    {%endif%}
+    
+    {% endfor %}
+    {% endfor %}
+    {%endif%}
+    {%endif%}
+    {% endfor %}
+
+
+    {% for i in classes.lecture_name.all %}
+    {% for l in class %}
+    {% for j in ta %}
+    {% for k in j.classroom_name.all %}
+    -->
+    <!--- <h1>Lecture name: {{i}}</h1>
+     <h1>lecture start time:  {{i.l_date|time:"H"}} </h1>
+     <h1>lecture end time:  {{i.l_date_end|time:"H"}} </h1>
+     <h3> current time:  {{mydate|time:"H"}} </h3>
+  -->
+  <!--
+    <h1>
+       Öğretmenin Sınıfı:  {{k}}
+    </h1>
+
+    <h1>
+       Şuan ki ders:  {{l.classroom_name}}
+
+
+    </h1>
+    
+    {%if mydate|time:"H" >= i.l_date|time:"H" and mydate|time:"H" <= i.l_date_end|time:"H" %}
+    {%if i.l_date|date:"l" == mydate|date:"l" %}
+
+   
+    {%if j.lecture_name == i.lecture_name and k == i.classroom_name %}
+         <h1>Lecturer Name: {{j.ta_name}}</h1>
+    
+       
+      <h1 class="text-light" style="padding-bottom: 10px;
+      padding-top: 1%;
+      text-align: center;
+      
+      bottom: 0px">Current Lecture: {{i}}</h1 >
+      -->
+ <!--  <div class="container">
+    <h2>Card Image</h2>
+    <p>Image at the top (card-img-top):</p>
+    <div class="card" style="width:400px">
+      <img class="card-img-top" src="img_avatar1.png" alt="Card image" style="width:100%">
+      <div class="card-body">
+        <h4 class="card-title">John Doe</h4>
+        <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+        <a href="#" class="btn btn-primary">See Profile</a>
+      </div>
+    </div>
+    -->
+
+      
+        
+     <!--- <h5>{{i.l_date}}</h5>
+      <h5>{{i.l_date_end}}</h5>
+     <h5>{{i.l_date}}</h5>
+     -->
+<!--
+     {% endif %}
+     {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    {% endfor %}
+    {% endfor %}
+-->
+  
+</body>
+</html>

@@ -30,13 +30,6 @@ def about(request,pk_test):
     student=Student.objects.all()
     lectures = Lecture.objects.all()
     mydate = datetime.today()
-    print(classes)
-    print(department)
-    print("ADS ADS ADS ",ads)
-    print(student)
-    print("Lecture Objects: ",lectures)
-    print("student",student)
-    print(mydate)
     context = {'classes':classes,'department':department,'ads':ads,'student':student,'lecture':lectures,'mydate':mydate,'events':events}
     return render(request,'about.html',context)
 
@@ -47,9 +40,6 @@ def schedule(request,pk_test):
     classes = Classroom.objects.get(classroom_name=pk_test)
     department = Department.objects.all()
     ads= Ads.objects.all()
-    print("Lecture Objects: ",lectures)
-    print("student",student)
-    print(mydate)
     context = {'classes':classes,'department':department,'ads':ads,'student':student,'lecture':lectures,'mydate':mydate}
     return render(request,'schedule.html',context)
     
@@ -62,16 +52,6 @@ def information(request,pk_test):
     student=Student.objects.all()
     lectures = Lecture.objects.all()
     mydate = datetime.today()
-   
-    print("Classrooms",classes)
-    print(department)
-    print("ADS ADS ADS ",ads)
-    print(student)
-    print("Lecture Objects: ",lectures)
-    print("student",student)
-    print(mydate)
-    print("*************",ta)
-    print("*************",department)
     context = {'classes':classes,'department':department,'ads':ads,'student':student,'lecture':lectures,'mydate':mydate,'events':events,'ta':ta}
     return render(request,'information.html',context)
 
